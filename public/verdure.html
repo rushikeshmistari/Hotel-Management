@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verdure — Hotel &amp; Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="verdure.css">
+</head>
+<body>
+
+<!-- Ambient Spline background -->
+<div class="scene-bg" aria-hidden="true">
+  <iframe src="https://my.spline.design/greenvoid-I9mql4AUq5B7gt7UXCYMqYRm/"
+          frameborder="0" title="Ambient background scene"></iframe>
+</div>
+<div class="scene-veil" aria-hidden="true"></div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- NAV -->
+<header class="nav">
+  <a href="#home" class="nav__logo">Verdure</a>
+  <nav class="nav__links" id="navLinks">
+    <a href="#home" class="nav__link" data-section="home">Home</a>
+    <a href="#rooms" class="nav__link" data-section="rooms">Rooms</a>
+    <a href="#gallery" class="nav__link" data-section="gallery">Gallery</a>
+    <a href="#about" class="nav__link" data-section="about">About</a>
+    <a href="#contact" class="nav__link" data-section="contact">Contact</a>
+  </nav>
+  <a href="#account" class="nav__admin" id="navAccountLink">Account</a>
+  <a href="#admin" class="nav__admin">Admin</a>
+  <button class="nav__burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main>
+
+  <!-- HOME / HERO -->
+  <section id="home" class="section hero">
+    <div class="hero__content" id="heroContent">
+      <p class="hero__kicker">A quiet stay, deep in the green</p>
+      <h1 class="hero__title">Rest where the<br>light turns emerald.</h1>
+      <p class="hero__sub">Verdure is a small hotel built around stillness — one garden, a handful of rooms,
+        and views that change with the hour. Log in to check dates and reserve your stay.</p>
+      <div class="hero__actions">
+        <a href="#account" class="btn btn--primary" id="heroBookBtn">Book a stay</a>
+        <a href="#rooms" class="btn btn--ghost">View rooms</a>
+      </div>
+      <div class="hero__stats">
+        <div><strong id="statRooms">–</strong><span>rooms</span></div>
+        <div><strong>4.9</strong><span>guest rating</span></div>
+        <div><strong>2018</strong><span>opened</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS -->
+  <section id="rooms" class="section">
+    <div class="section__head">
+      <h2>Rooms</h2>
+      <p>Each room is named for what grows outside its window. Availability comes straight from the front desk.</p>
+    </div>
+    <div class="rooms-grid" id="roomsGrid"></div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section">
+    <div class="section__head">
+      <h2>Gallery</h2>
+      <p>A look around the property.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <div class="section__head">
+      <h2>About Verdure</h2>
+    </div>
+    <div class="about-layout">
+      <div class="about-copy">
+        <p>Verdure opened in 2018 in a converted greenhouse nursery, and the plants never really left —
+          they just moved in with us. Every room looks onto the courtyard garden, and the restaurant
+          runs on what's in season a short walk from the kitchen door.</p>
+        <p>We keep the hotel small on purpose. A handful of rooms means the front desk knows your name by
+          the second morning, and the garden never feels crowded, even in the evenings when most guests
+          drift out to it with a book.</p>
+      </div>
+      <dl class="about-facts">
+        <div><dt>Location</dt><dd>Alibaug, Maharashtra</dd></div>
+        <div><dt>Front desk</dt><dd>24 hours</dd></div>
+        <div><dt>Check-in</dt><dd>2:00 PM</dd></div>
+        <div><dt>Check-out</dt><dd>11:00 AM</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="section__head">
+      <h2>Contact</h2>
+      <p>Questions before you book? Reach out directly, or send a note here.</p>
+    </div>
+    <div class="contact-layout">
+      <div class="panel contact-info">
+        <div class="contact-info__row"><span>Address</span><strong>14 Nursery Road, Alibaug, MH 402201</strong></div>
+        <div class="contact-info__row"><span>Phone</span><strong>+91 22 4567 8900</strong></div>
+        <div class="contact-info__row"><span>Email</span><strong>stay@verdure.example</strong></div>
+        <div class="contact-info__row"><span>Front desk</span><strong>24 hours</strong></div>
+      </div>
+      <form class="panel contact-form" id="contactForm">
+        <div class="form-row">
+          <label for="cfName">Name</label>
+          <input type="text" id="cfName" required>
+        </div>
+        <div class="form-row">
+          <label for="cfEmail">Email</label>
+          <input type="email" id="cfEmail" required>
+        </div>
+        <div class="form-row">
+          <label for="cfMsg">Message</label>
+          <textarea id="cfMsg" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Send message</button>
+        <p class="form-error" id="contactError" role="alert"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ACCOUNT (customer dashboard) -->
+  <section id="account" class="section">
+    <div class="section__head">
+      <h2>Your account</h2>
+      <p>Log in or create a free account to book a room and see your reservations.</p>
+    </div>
+
+    <div class="panel auth-card" id="accountGate">
+      <div class="auth-tabs">
+        <button class="auth-tab is-active" id="tabLoginBtn" type="button">Log in</button>
+        <button class="auth-tab" id="tabSignupBtn" type="button">Create account</button>
+      </div>
+
+      <form class="auth-form is-active" id="loginForm">
+        <div class="form-row">
+          <label for="liEmail">Email</label>
+          <input type="email" id="liEmail" required placeholder="asha@example.com" autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="liPassword">Password</label>
+          <input type="password" id="liPassword" required placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Log in</button>
+        <p class="form-error" id="loginError" role="alert"></p>
+      </form>
+
+      <form class="auth-form" id="signupForm">
+        <div class="form-row">
+          <label for="suName">Full name</label>
+          <input type="text" id="suName" required placeholder="Asha Rao" autocomplete="name">
+        </div>
+        <div class="form-row">
+          <label for="suEmail">Email</label>
+          <input type="email" id="suEmail" required placeholder="asha@example.com" autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="suPhone">Phone <span class="muted">(optional)</span></label>
+          <input type="tel" id="suPhone" placeholder="+91 98765 43210" autocomplete="tel">
+        </div>
+        <div class="form-row">
+          <label for="suPassword">Password</label>
+          <input type="password" id="suPassword" required minlength="6" placeholder="At least 6 characters" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Create account</button>
+        <p class="form-error" id="signupError" role="alert"></p>
+      </form>
+    </div>
+
+    <div id="accountDashboard" hidden>
+      <div class="dash-head">
+        <div>
+          <h3 id="welcomeHeading">Welcome back</h3>
+          <p class="muted">Book a room below, or check your existing reservations.</p>
+        </div>
+        <button class="btn btn--ghost btn--small" id="customerLogoutBtn">Log out</button>
+      </div>
+
+      <div class="booking-layout">
+        <form class="panel booking-form" id="bookingForm" novalidate>
+          <div class="form-row form-row--split">
+            <div>
+              <label for="bfName">Full name</label>
+              <input type="text" id="bfName" readonly>
+            </div>
+            <div>
+              <label for="bfEmail">Email</label>
+              <input type="email" id="bfEmail" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="bfPhone">Phone</label>
+            <input type="tel" id="bfPhone" required placeholder="+91 98765 43210">
+          </div>
+          <div class="form-row">
+            <label for="bfRoom">Room</label>
+            <select id="bfRoom" required></select>
+          </div>
+          <div class="form-row form-row--split">
+            <div>
+              <label for="bfCheckin">Check-in</label>
+              <input type="date" id="bfCheckin" required>
+            </div>
+            <div>
+              <label for="bfCheckout">Check-out</label>
+              <input type="date" id="bfCheckout" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="bfGuests">Guests</label>
+            <input type="number" id="bfGuests" min="1" max="6" value="2" required>
+          </div>
+          <div class="form-row">
+            <label for="bfNotes">Special requests <span class="muted">(optional)</span></label>
+            <textarea id="bfNotes" rows="3" placeholder="Late check-in, garden view, anything else..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block" id="bookingSubmit">Confirm booking</button>
+          <p class="form-error" id="bookingError" role="alert"></p>
+        </form>
+
+        <aside class="panel booking-summary">
+          <h3>Your stay</h3>
+          <div class="summary-row"><span>Room</span><strong id="sumRoom">—</strong></div>
+          <div class="summary-row"><span>Nights</span><strong id="sumNights">—</strong></div>
+          <div class="summary-row"><span>Rate</span><strong id="sumRate">—</strong></div>
+          <div class="summary-row summary-row--total"><span>Total</span><strong id="sumTotal">—</strong></div>
+          <p class="summary-note">The final total is calculated by the hotel's server when you submit. Requests
+            start as pending until the front desk confirms them.</p>
+        </aside>
+      </div>
+
+      <h3 class="subhead">My bookings</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Room</th><th>Check-in</th><th>Check-out</th><th>Guests</th><th>Total</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="myBookingsBody"></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="myBookingsEmpty" hidden>No bookings yet — the one you make above will show up here.</p>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="admin" class="section">
+    <div class="section__head">
+      <h2>Admin dashboard</h2>
+      <p>Manage rooms, reservations and guest messages.</p>
+    </div>
+
+    <div class="panel admin-gate" id="adminGate">
+      <label for="adminPass">Admin password</label>
+      <input type="password" id="adminPass" placeholder="Enter admin password" autocomplete="off">
+      <button class="btn btn--primary" id="adminLoginBtn" type="button">Enter dashboard</button>
+      <p class="form-error" id="adminError" role="alert"></p>
+      <p class="summary-note">Set on the server with the <code>ADMIN_PASSWORD</code> environment variable
+        (default <code>verdure123</code>).</p>
+    </div>
+
+    <div id="adminDashboard" hidden>
+      <div class="dash-head">
+        <div class="admin-stats">
+          <div class="stat-card"><strong id="statTotalRooms">0</strong><span>rooms</span></div>
+          <div class="stat-card"><strong id="statAvailRooms">0</strong><span>available</span></div>
+          <div class="stat-card"><strong id="statTotalBookings">0</strong><span>bookings</span></div>
+          <div class="stat-card"><strong id="statPendingBookings">0</strong><span>pending</span></div>
+        </div>
+        <button class="btn btn--ghost btn--small" id="adminLogoutBtn">Log out</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab is-active" data-tab="tabBookings">Bookings</button>
+        <button class="admin-tab" data-tab="tabRooms">Rooms</button>
+        <button class="admin-tab" data-tab="tabMessages">Messages</button>
+      </div>
+
+      <div id="tabBookings">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Guest</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Guests</th><th>Total</th><th>Status</th><th></th></tr>
+            </thead>
+            <tbody id="bookingsTableBody"></tbody>
+          </table>
+        </div>
+        <p class="empty-note" id="bookingsEmpty" hidden>No bookings yet. They'll appear here once someone books a room.</p>
+      </div>
+
+      <div id="tabRooms" hidden>
+        <form class="panel room-form" id="roomForm">
+          <h3>Add a room</h3>
+          <div class="form-row form-row--split">
+            <div>
+              <label for="rfName">Room name</label>
+              <input type="text" id="rfName" required placeholder="Fern Room">
+            </div>
+            <div>
+              <label for="rfPrice">Price / night (₹)</label>
+              <input type="number" id="rfPrice" min="0" required placeholder="4500">
+            </div>
+          </div>
+          <div class="form-row form-row--split">
+            <div>
+              <label for="rfCapacity">Capacity</label>
+              <input type="number" id="rfCapacity" min="1" max="10" required placeholder="2">
+            </div>
+            <div>
+              <label for="rfTag">Tag</label>
+              <input type="text" id="rfTag" placeholder="Garden view">
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary">Add room</button>
+          <p class="form-error" id="roomError" role="alert"></p>
+        </form>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Room</th><th>Price</th><th>Capacity</th><th>Tag</th><th>Status</th><th></th></tr>
+            </thead>
+            <tbody id="roomsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tabMessages" hidden>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>From</th><th>Message</th><th>Received</th></tr></thead>
+            <tbody id="messagesTableBody"></tbody>
+          </table>
+        </div>
+        <p class="empty-note" id="messagesEmpty" hidden>No messages yet.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>© 2026 Verdure Hotel</span>
+  <span>HTML, CSS &amp; JavaScript front end · Java back end</span>
+</footer>
+
+<script src="verdure.js"></script>
+</body>
+</html>
